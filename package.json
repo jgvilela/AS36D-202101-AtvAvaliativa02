@@ -1,0 +1,25 @@
+{
+  "name": "as36d-202101-atvavaliativa02",
+  "version": "1.0.0",
+  "description": "Atividade Avaliativa 02 - AS36D - 2021-01",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jgvilela/AS36D-202101-AtvAvaliativa02.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jgvilela/AS36D-202101-AtvAvaliativa02/issues"
+  },
+  "homepage": "https://github.com/jgvilela/AS36D-202101-AtvAvaliativa02#readme",
+  "dependencies": {
+    "axios": "^0.21.1",
+    "express": "^4.17.1",
+    "node-mailer": "^0.1.1",
+    "node-persist": "^3.1.0"
+  }
+}
