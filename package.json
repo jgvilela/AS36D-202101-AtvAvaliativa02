@@ -4,7 +4,8 @@
   "description": "Atividade Avaliativa 02 - AS36D - 2021-01",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "server": "nodemon ./server.js"
   },
   "repository": {
     "type": "git",
@@ -20,6 +21,7 @@
     "axios": "^0.21.1",
     "express": "^4.17.1",
     "node-mailer": "^0.1.1",
-    "node-persist": "^3.1.0"
+    "node-persist": "^3.1.0",
+    "nodemon": "^2.0.12"
   }
 }
