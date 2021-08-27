@@ -1,12 +1,5 @@
 const axios = require('axios').default;
 
-function getSomething() {
-    return axios.get('http://localhost:3000/noticia/3')
-                .then((response) => {
-                    console.log(response.data);
-                });
-} 
-
 function putNews() {
     return axios.put('http://localhost:3000/noticia/3')
     .then((res) => {
@@ -34,6 +27,23 @@ function postAllEmails() {
     })
 }
 
+function getNews() {
+    return axios.get('http://localhost:3000/noticia/3')
+                .then((response) => {
+                    console.log(response.data);
+                    postAllEmails();
+                });
+} 
+
+
+function getAllNews() {
+    return axios.get('http://localhost:3000/noticia')
+                .then((response) => {
+                    console.log(response.data);
+                    getNews();
+                });
+} 
+
 function postAllNews() {
     return axios.post('http://localhost:3000/noticia', {
         titulo: 'Soja brasileira 2021/22 mais competitiva ja atrai demanda da China; compras chegam a 8 mi de t',
@@ -58,7 +68,7 @@ function postAllNews() {
     })
     .then((res) => {
         console.log(res.data);
-        postAllEmails();
+        getAllNews();
     })
     .catch(err => {
         console.log(err.response.data);
