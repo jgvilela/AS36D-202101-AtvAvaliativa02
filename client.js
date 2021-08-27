@@ -7,6 +7,33 @@ function getSomething() {
                 });
 } 
 
+function putNews() {
+    return axios.put('http://localhost:3000/noticia/3')
+    .then((res) => {
+        console.log(res.data);
+    })
+}
+
+function postAllEmails() {
+    return axios.post('http://localhost:3000/inscricao', {email:'teste1@gmail.com'})
+    .then((res) => {
+        console.log(res.data);
+        return axios.post('http://localhost:3000/inscricao', {email:'teste2@gmail.com'})
+    })
+    .then((res) => {
+        console.log(res.data);
+        return axios.post('http://localhost:3000/inscricao', {email:'teste3@gmail.com'})
+    })
+    .then((res) => {
+        console.log(res.data);
+        return axios.post('http://localhost:3000/inscricao', {email:'teste4@gmail.com'})
+    })
+    .then((res) => {
+        console.log(res.data);
+        putNews();
+    })
+}
+
 function postAllNews() {
     return axios.post('http://localhost:3000/noticia', {
         titulo: 'Soja brasileira 2021/22 mais competitiva ja atrai demanda da China; compras chegam a 8 mi de t',
@@ -29,42 +56,13 @@ function postAllNews() {
             url: 'arabica_e_conilon_dia_alta'
         })
     })
-    // .then((res) => {
-    //     console.log(res.data);
-    //     return axios.post('http://localhost:3000/noticia', {
-    //         titulo: 'BASF lanca duas solucoes para cultura do arroz e reforca compromisso com o Rizicultor',
-    //         resumo: 'Lidero, marca de sementes de arroz da empresa ja esta disponivel nesta Safra e alia teto produtivo e qualidade industrial',
-    //         url: 'basf_lanca_duas_solucoes_arroz'
-    //     })
-    // })
     .then((res) => {
         console.log(res.data);
+        postAllEmails();
     })
     .catch(err => {
         console.log(err.response.data);
     });
 }
 
-function postAllEmails() {
-    return axios.post('http://localhost:3000/inscricao', {email:'teste1@gmail.com'})
-    .then((res) => {
-        console.log(res.data);
-        return axios.post('http://localhost:3000/inscricao', {email:'teste2@gmail.com'})
-    })
-    .then((res) => {
-        console.log(res.data);
-        return axios.post('http://localhost:3000/inscricao', {email:'teste3@gmail.com'})
-    })
-    .then((res) => {
-        console.log(res.data);
-        return axios.post('http://localhost:3000/inscricao', {email:'teste4@gmail.com'})
-    })
-    .then((res) => {
-        console.log(res.data);
-        getSomething();
-    })
-}
-
 postAllNews();
-postAllEmails();
-//getSomething();

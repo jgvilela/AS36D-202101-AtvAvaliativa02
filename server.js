@@ -1,6 +1,7 @@
 const express = require('express');
 const storage = require('node-persist');
 const bodyParser = require('body-parser');
+const nodemailer = require('nodemailer');
 
 const app = express();
 app.use(bodyParser.json());
@@ -25,6 +26,7 @@ async function main() {
     postSubscription();
     getNews();
     getNewsById();
+    putNews();
 }
 
 async function saveNews(newNews) {
@@ -101,6 +103,58 @@ async function getNewsById() {
         }
     
         res.send(ne);
+    });
+}
+
+async function putNews() {
+    await app.put('/noticia/:newsID', async (req, res) => {
+        const newsID = parseInt(req.params.newsID);
+        if (isNaN(newsID)) {
+            res.status(500).send('Não é um inteiro válido.');
+            return;
+        }
+
+        await storage.init();
+
+        let news = await storage.getItem('news');
+        let emails = await storage.getItem('emails');
+    
+        const ne = news.find(n => n.ID === newsID);
+
+        if (!ne) {
+            res.status(500).send('ID de notícia inválida.');
+            return;
+
+        } else {
+            // Create a SMTP transporter object
+            const transporter = nodemailer.createTransport({
+                host: 'smtp.ethereal.email',
+                port: 587,
+                auth: {
+                    user: 'tara.russel@ethereal.email',
+                    pass: 'pjd2Dd6YpRUNGgzys1'
+                }
+            });
+            
+            emails.forEach(element => {
+                
+                setTimeout(async () => {
+
+                    const info = await transporter.sendMail({
+                        from: 'Tara Russel <tara.russel@ethereal.email>',
+                        to: element.email,
+                        subject: ne.titulo,
+                        text: ne.resumo
+                    });
+        
+                    console.log('Message ID: ', info.messageId);
+                    
+                }, 2000);
+
+            });
+        }
+
+        res.send(emails);
     });
 }
 
